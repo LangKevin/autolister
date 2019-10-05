@@ -1,0 +1,16 @@
+<h1>Add a New Auto</h1>
+
+<form action="/autos" method="POST">
+  <label> Owner Name </label>
+  <input type="text" name="Owner Name"> </br>
+
+  <label> Auto Name </label>
+  <input type="text" name="Name"> </br>
+
+  <label> Buyers </label>
+  <% Buyer.all.each do |buyer| %>
+    <input id="<%= buyer.name %>" type="checkbox" name="buyers[]" value="<%= buyer.id %>">
+  <% end %>
+
+  <input type="submit" value="Create">
+</form>

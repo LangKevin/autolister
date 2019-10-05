@@ -1,0 +1,11 @@
+<ul>
+  <% @owner.autos.each do |auto| %>
+    <li><a href="/autos/<%= auto.slug %>"><%= auto.name %> </a></li>
+  <% end %>
+</ul>
+
+<ul>
+  <% @owner.buyers.each do |buyer| %>
+    <li><a href="/buyers/<%= buyer.slug %>"><%= buyer.name %> </a></li>
+  <% end %>
+</ul>

@@ -1,0 +1,11 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1> <%= @auto.name %> </h1>
+
+<a href="/owners/<%= @auto.owner.slug %>"> <%= @auto.owner.name %> </a>
+
+<% @auto.buyers.each do |buyer| %>
+  <a href="/buyers/<%= buyer.slug %>"><%= buyer.name %> </a>
+<% end %>
