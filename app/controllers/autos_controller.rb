@@ -14,7 +14,7 @@ class AutosController < ApplicationController
 
   get '/autos/:slug' do
     @auto = Auto.find_by_slug(params[:slug])
-
+# binding.pry
     erb :'autos/show'
   end
 
@@ -24,7 +24,7 @@ class AutosController < ApplicationController
     @auto.buyer_ids = params[:buyers]
     @auto.save
 
-    flash[:message] = "Successfully created song."
+    # flash[:message] = "Successfully created song."
 
     redirect("/autos/#{@auto.slug}")
   end

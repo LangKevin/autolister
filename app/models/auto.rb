@@ -8,6 +8,6 @@ class Auto < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    Auto.all.find { |auto| auto.slug == slug }
+    return Auto.all.find { |auto| auto.slug == slug }
   end
 end

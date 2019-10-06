@@ -8,6 +8,6 @@ class Buyer < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    Buyer.all.find { |buyer| buyer.slug == slug }
+    return Buyer.all.find { |buyer| buyer.slug == slug }
   end
 end
