@@ -11,13 +11,14 @@ class UsersController < ApplicationController
   # end
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    # binding.pry
+    binding.pry
     erb :'users/show'
   end
   get "/signup" do
     if is_logged_in?
       redirect to '/tweets'
     else
+      # binding.pry
       erb :'users/create_user'
     end
   end
