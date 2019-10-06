@@ -1,4 +1,5 @@
 class Buyer < ActiveRecord::Base
+  belongs_to :user
   has_many :auto_buyers
   has_many :autos, through: :auto_buyers
   has_many :owners, through: :autos

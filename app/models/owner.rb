@@ -1,5 +1,5 @@
-
 class Owner < ActiveRecord::Base
+  belongs_to :user
   has_many :autos
   has_many :buyers, :through => :autos
 

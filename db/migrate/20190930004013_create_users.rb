@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username
       t.string :email
       t.string :password_digest
+      t.boolean :is_owner, :default => false
     end
   end
 end

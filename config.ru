@@ -4,5 +4,9 @@ require './config/environment'
 # end
 
 use Rack::MethodOverride
+use AutosController
+use BuyersController
+use OwnersController
+use TweetsController
 use UsersController
 run ApplicationController
