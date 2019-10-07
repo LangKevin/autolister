@@ -10,4 +10,8 @@ class Owner < ActiveRecord::Base
   def self.find_by_slug(slug)
     return Owner.all.find{|owner| owner.slug == slug}
   end
+  def self.find_by_user(user)
+    return Owner.all.find{|owner| owner.user == user}
+  end
+
 end

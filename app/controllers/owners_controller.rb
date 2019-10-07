@@ -9,4 +9,5 @@ class OwnersController < ApplicationController
     @owner = Owner.find_by_slug(params[:slug])
     erb :'owners/show'
   end
+  
 end

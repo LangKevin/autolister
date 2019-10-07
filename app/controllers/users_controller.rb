@@ -27,9 +27,15 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       @user = User.new(params)
+      binding.pry
+      @owner = Owner.new(name: params[:username])
+      @owner.user = @user
+binding.pry
       @user.save
+      @owner.save
+binding.pry
       session[:user_id] = @user.id
-      redirect to '/tweets'
+      redirect("/owners/#{@owner.slug}")
     end
   end
 
@@ -39,7 +45,10 @@ class UsersController < ApplicationController
   end
   get "/login" do
     if is_logged_in?
-      redirect to '/tweets'
+      # redirect to '/tweets'
+      @user = User.find(session[:user_id])
+      @owner = Owner.find_by_user(@user)
+      redirect("/owners/#{@owner.slug}")
     else
       erb :'users/login'
     end
@@ -48,7 +57,8 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to "/tweets"
+      @owner = Owner.find_by_user(@user)
+      redirect("/owners/#{@owner.slug}")
     else
       redirect to "/signup"
     end
