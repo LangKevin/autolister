@@ -11,7 +11,7 @@ class AutosController < ApplicationController
   get '/autos/new' do
     @user = User.find(session[:user_id])
     @owner = Owner.find_by_user(@user)
-    binding.pry
+    # binding.pry
     erb :'/autos/new'
   end
 
@@ -22,13 +22,13 @@ class AutosController < ApplicationController
   end
 
   post '/autos' do
-binding.pry
+# binding.pry
     @user = User.find(session[:user_id])
     @owner = Owner.find_by_user(@user)
-    @auto = Auto.create(:name => params["Name"])
+    @auto = Auto.create(params)
     @auto.owner = @owner
     @auto.buyer_ids = params[:buyers]
-binding.pry
+ binding.pry
     @auto.save
 
     # flash[:message] = "Successfully created song."

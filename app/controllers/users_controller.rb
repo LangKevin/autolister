@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # end
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    binding.pry
+    # binding.pry
     erb :'users/show'
   end
   get "/signup" do
@@ -27,15 +27,30 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       @user = User.new(params)
-      binding.pry
-      @owner = Owner.new(name: params[:username])
-      @owner.user = @user
 binding.pry
+      if @user.is_owner
+        @owner = Owner.new(name: params[:username])
+
+      else
+        @buyer = Buyer.new(name: params[:username])
+
+        binding.pry
+
+      end
       @user.save
-      @owner.save
 binding.pry
       session[:user_id] = @user.id
-      redirect("/owners/#{@owner.slug}")
+      if @user.is_owner
+        @owner.user = @user
+        @owner.save
+        redirect("/owners/#{@owner.slug}")
+      else
+binding.pry
+        @buyer.user = @user
+binding.pry
+        @buyer.save
+        redirect("/buyers/#{@buyer.slug}")
+      end
     end
   end
 
