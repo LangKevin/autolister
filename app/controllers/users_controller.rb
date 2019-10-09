@@ -27,27 +27,27 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       @user = User.new(params)
-binding.pry
+# binding.pry
       if @user.is_owner
         @owner = Owner.new(name: params[:username])
 
       else
         @buyer = Buyer.new(name: params[:username])
 
-        binding.pry
+        # binding.pry
 
       end
       @user.save
-binding.pry
+# binding.pry
       session[:user_id] = @user.id
       if @user.is_owner
         @owner.user = @user
         @owner.save
         redirect("/owners/#{@owner.slug}")
       else
-binding.pry
+# binding.pry
         @buyer.user = @user
-binding.pry
+# binding.pry
         @buyer.save
         redirect("/buyers/#{@buyer.slug}")
       end
@@ -72,8 +72,13 @@ binding.pry
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      @owner = Owner.find_by_user(@user)
-      redirect("/owners/#{@owner.slug}")
+      if @user.is_owner
+        @owner = Owner.find_by_user(@user)
+        redirect("/owners/#{@owner.slug}")
+      else
+        @buyer = Buyer.find_by_user(@user)
+        redirect("/buyers/#{@buyer.slug}")
+      end
     else
       redirect to "/signup"
     end

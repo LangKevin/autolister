@@ -1,11 +1,9 @@
+<form action="/autos/new" method="GET">
 <ul>
   <% @buyer.autos.each do |auto| %>
     <li><a href="/autos/<%= auto.slug %>"><%= auto.name %> </a></li>
   <% end %>
-</ul>
 
-<ul>
-  <% @buyer.owners.each do |owner| %>
-    <li><a href="/owners/<%= owner.slug %>"><%= owner.name %> </a></li>
-  <% end %>
 </ul>
+<input type="submit" value="Add Auto">
+</form>

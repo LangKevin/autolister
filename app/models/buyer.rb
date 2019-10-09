@@ -11,4 +11,7 @@ class Buyer < ActiveRecord::Base
   def self.find_by_slug(slug)
     return Buyer.all.find { |buyer| buyer.slug == slug }
   end
+  def self.find_by_user(user)
+    return Buyer.all.find{|buyer| buyer.user == user}
+  end
 end
