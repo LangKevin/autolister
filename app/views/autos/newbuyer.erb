@@ -1,0 +1,12 @@
+<h1>Edit <%= @buyer.name %></h1>
+
+<form action="/buyers" method="POST">
+
+
+  <% Auto.all.each do |auto| %>
+    <label><%= auto.name %></label>
+    <input type="checkbox" name="autos[]" value="<%= auto.id %>" id="<%= auto.name %>" <%='checked' if @buyer.autos.include?(auto) %>>
+  <% end %>
+
+  <input type="submit" value="SaveJive">
+</form>

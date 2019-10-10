@@ -11,7 +11,7 @@ class AutosController < ApplicationController
   get '/autos/new' do
     @user = User.find(session[:user_id])
 
-    binding.pry
+    # binding.pry
     if @user.is_owner
       @owner = Owner.find_by_user(@user)
       erb :'/autos/new'
@@ -22,13 +22,14 @@ class AutosController < ApplicationController
   end
 
   get '/autos/:slug' do
+    # binding.pry
     @auto = Auto.find_by_slug(params[:slug])
-# binding.pry
+    # binding.pry
     erb :'autos/show'
   end
 
   post '/autos' do
-  binding.pry
+  # binding.pry
     @user = User.find(session[:user_id])
     if @user.is_owner
       @owner = Owner.find_by_user(@user)
@@ -47,11 +48,13 @@ class AutosController < ApplicationController
   end
 
   get '/autos/:slug/edit' do
+    binding.pry
     @auto = Auto.find_by_slug(params[:slug])
     erb :'autos/edit'
   end
 
   patch '/autos/:slug' do
+    # binding.pry
     @auto = Auto.find_by_slug(params[:slug])
     @auto.update(params[:auto])
     @auto.owner = Owner.find_or_create_by(name: params[:owner][:name])

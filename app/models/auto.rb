@@ -4,12 +4,14 @@ class Auto < ActiveRecord::Base
   has_many :buyers, through: :auto_buyers
 
   def slug
-    name.downcase.gsub(" ","-")
+    # name.downcase.gsub(" ","-")
+    id
   end
   def name
     return year + ' ' + make + ' ' + model + ' ' + price
   end
   def self.find_by_slug(slug)
-    return Auto.all.find { |auto| auto.slug == slug }
+    # return Auto.all.find { |auto| auto.slug == slug }
+    return Auto.find(slug)
   end
 end
