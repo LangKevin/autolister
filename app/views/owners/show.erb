@@ -1,10 +1,35 @@
 <form action="/autos/new" method="GET">
-<ul>
-  <% @owner.autos.each do |auto| %>
-    <li><a href="/autos/<%= auto.slug %>"><%= auto.name %> </a></li>
-  <% end %>
-</ul>
+  <html>
+  <head>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  </style>
+  </head>
+  <body>
+<h2>Welcome <%= @owner.name%></h2>
+<p>Current Autos for sale</p>
+<table style="width:65%">
+  <tr>
+    <th>Link</th>
+    <th>Year</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Price</th>
+    <% @owner.autos.each do |auto| %>
+      <tr>
+        <td><a href="/autos/<%= auto.slug %>"><%= auto.id %> </a></td>
+        <td><%= auto.year %></td>
+        <td><%= auto.make %></td>
+        <td><%= auto.model %></td>
+        <td><%= auto.price %></td>
+      </tr>
+    <% end %>
+  </tr>
+</table>
 
+<p>Current Buyers interested</p>
 <ul>
   <% @owner.buyers.each do |buyer| %>
     <li><a href="/buyers/<%= buyer.slug %>"><%= buyer.name %> </a></li>
