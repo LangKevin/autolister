@@ -30,10 +30,18 @@
 </table>
 
 <p>Current Buyers interested</p>
-<ul>
-  <% @owner.buyers.each do |buyer| %>
-    <li><a href="/buyers/<%= buyer.slug %>"><%= buyer.name %> </a></li>
-  <% end %>
-</ul>
+<table style="width:65%">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <% @owner.buyers.each do |buyer| %>
+      <tr>
+        <td><%= buyer.name %></td>
+        <td><%= buyer.email %></td>
+      </tr>
+    <% end %>
+  </tr>
+</table>
+
 <input type="submit" value="Add Auto">
 </form>

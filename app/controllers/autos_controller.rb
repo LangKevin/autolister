@@ -25,7 +25,7 @@ class AutosController < ApplicationController
     # binding.pry
     @auto = Auto.find_by_slug(params[:slug])
     # binding.pry
-    erb :'autos/show'
+    erb :'autos/edit'
   end
 
   post '/autos' do
@@ -57,9 +57,9 @@ class AutosController < ApplicationController
     # binding.pry
     @auto = Auto.find_by_slug(params[:slug])
     @auto.update(params[:auto])
-    @auto.owner = Owner.find_or_create_by(name: params[:owner][:name])
-    @song.buyer_ids = params[:buyer]
-    @song.save
+    # @auto.owner = Owner.find_or_create_by(name: params[:owner][:name])
+    # @auto.buyer_ids = params[:buyer]
+    @auto.save
 
     # flash[:message] = "Successfully updated song."
     redirect("/autos/#{@auto.slug}")

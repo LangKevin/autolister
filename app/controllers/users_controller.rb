@@ -9,14 +9,33 @@ class UsersController < ApplicationController
   # get "/" do
   #   erb :index
   # end
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    # binding.pry
-    erb :'users/show'
+
+  get "/login" do
+    if is_logged_in?
+      @user = User.find(session[:user_id])
+      if @user.is_owner
+        @owner = Owner.find_by_user(@user)
+        redirect("/owners/#{@owner.slug}")
+      else
+        @buyer = Buyer.find_by_user(@user)
+        redirect("/buyers/#{@buyer.slug}")
+
+      end
+    else
+      erb :'users/login'
+    end
   end
   get "/signup" do
+    binding.pry
     if is_logged_in?
-      redirect to '/tweets'
+      @user = User.find(session[:user_id])
+      if @user.is_owner
+        @owner = Owner.find_by_user(@user)
+        redirect("/owners/#{@owner.slug}")
+      else
+        @buyer = Buyer.find_by_user(@user)
+        redirect("/buyers/#{@buyer.slug}")
+      end
     else
       # binding.pry
       erb :'users/create_user'
@@ -42,11 +61,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       if @user.is_owner
         @owner.user = @user
+        @owner.email = @user.email
         @owner.save
         redirect("/owners/#{@owner.slug}")
       else
 # binding.pry
         @buyer.user = @user
+        @buyer.email = @buyer.email
 # binding.pry
         @buyer.save
         redirect("/buyers/#{@buyer.slug}")
@@ -58,16 +79,7 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     erb :account
   end
-  get "/login" do
-    if is_logged_in?
-      # redirect to '/tweets'
-      @user = User.find(session[:user_id])
-      @owner = Owner.find_by_user(@user)
-      redirect("/owners/#{@owner.slug}")
-    else
-      erb :'users/login'
-    end
-  end
+
   post "/login" do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])

@@ -1,18 +1,24 @@
-<h1>Edit <%= @auto.name %></h1>
+<h1>Edit your auto info</h1>
 
 <form action="/autos/<%= @auto.slug %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
 
-  <label for="name">Name</label>
-  <input type="text" name="auto[name]" id="name" value="<%= @auto.name %>">
+  <label for="make">Make</label>
+  <input type="text" name="auto[make]" id="make" value="<%= @auto.make %>">
 
-  <label for="owner_name">Owner Name</label>
-  <input type="text" name="owner[name]" value="<%= @auto.owner.name %>" id="owner_name">
+  <label for="model">Model</label>
+  <input type="text" name="auto[model]" id="model" value="<%= @auto.model %>">
 
-  <% Buyer.all.each do |buyer| %>
-    <label><%= buyer.name %></label>
-    <input type="checkbox" name="buyers[]" value="<%= buyer.id %>" id="<%= buyer.name %>" <%='checked' if @auto.buyers.include?(buyer) %>>
-  <% end %>
+  <label for="year">Year</label>
+  <input type="text" name="auto[year]" id="name" value="<%= @auto.year %>">
 
+  <label for="price">Price</label>
+  <input type="text" name="auto[price]" id="name" value="<%= @auto.price %>">
+
+  <br>
+  <br>
+  <a href="/owners/<%= @auto.owner.name %>"> <%= @auto.owner.name  %> </a>
+  <br>
+  <br>
   <input type="submit" value="Save">
 </form>
