@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     end
   end
   get "/signup" do
-    binding.pry
+    # binding.pry
     if is_logged_in?
       @user = User.find(session[:user_id])
       if @user.is_owner
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       @user = User.new(params)
-# binding.pry
+binding.pry
       if @user.is_owner
         @owner = Owner.new(name: params[:username])
 
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       else
 # binding.pry
         @buyer.user = @user
-        @buyer.email = @buyer.email
+        @buyer.email = @user.email
 # binding.pry
         @buyer.save
         redirect("/buyers/#{@buyer.slug}")
