@@ -1,3 +1,5 @@
+<% if Helpers.is_logged_in?(session) %>
+
 <form action="/autos/new" method="GET">
   <html>
   <head>
@@ -45,3 +47,6 @@
 
 <input type="submit" value="Add Auto">
 </form>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
+<% end %>

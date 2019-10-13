@@ -1,3 +1,4 @@
+<% if Helpers.is_logged_in?(session) %>
 <h1>Edit your auto info</h1>
 
 <form action="/autos/<%= @auto.slug %>" method="POST">
@@ -23,3 +24,6 @@
   <input type="submit" value="Save">
   <a href="/logout">logout </a>
 </form>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
+<% end %>

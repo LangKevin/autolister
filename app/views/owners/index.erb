@@ -1,3 +1,7 @@
-<% @owners.each do |owner| %>
-  <li> <a href="/owners/<%= owner.slug %>"> <%= owner.name %> </a></li>
+<% if Helpers.is_logged_in?(session) %>
+  <% @owners.each do |owner| %>
+    <li> <a href="/owners/<%= owner.slug %>"> <%= owner.name %> </a></li>
+  <% end %>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
 <% end %>

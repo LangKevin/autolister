@@ -1,8 +1,9 @@
-<h1>Add a New Auto</h1>
+<% if Helpers.is_logged_in?(session) %>
+<h2>Add a New Auto <%= @owner.name %> </h2>
 
 <form action="/autos" method="POST">
-  <label> <%= @owner.name %> </label>
 
+</br>
   <input type="text" name="year" placeholder="Year:">
   <input type="text" name="make" placeholder="Make:">
   <input type="text" name="model" placeholder="Model:">
@@ -11,7 +12,10 @@
   <% Buyer.all.each do |buyer| %>
     <input id="<%= buyer.name %>" type="checkbox" name="buyers[]" value="<%= buyer.id %>">
   <% end %> -->
-
+</br>
   <input type="submit" value="Create">
-  <a href="/logout">logout </a>
+
 </form>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
+<% end %>

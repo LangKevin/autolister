@@ -1,4 +1,8 @@
+<% if Helpers.is_logged_in?(session) %>
 <% @autos.each do |auto| %>
   <li> <a href="/autos/<%= auto.slug %>"> <%= auto.name %> </a></li>
   <a href="/logout">logout </a>
+<% end %>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
 <% end %>

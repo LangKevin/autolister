@@ -1,3 +1,4 @@
+<% if Helpers.is_logged_in?(session) %>
 <html>
 <head>
 <style>
@@ -26,4 +27,6 @@ table, th, td {
 <% @auto.buyers.each do |buyer| %>
   <a href="/buyers/<%= buyer.slug %>"><%= buyer.name %> </a>
 <% end %>
-<a href="/logout">logout </a>
+<% else %>
+    <h1> You Must Be Logged in to autolister to view this page </h1>
+<% end %>
